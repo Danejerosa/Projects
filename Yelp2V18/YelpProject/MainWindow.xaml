@@ -1,0 +1,412 @@
+﻿<Window x:Class="YelpProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:local="clr-namespace:YelpProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1150">
+    <Grid>
+        <TabControl>
+            <TabItem Header="User Information">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Header="Set Current User" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="3">
+                        <StackPanel>
+                            <TextBox Name="userTextBox" Grid.Column="0" Grid.Row="0" Margin="5 5 5 5" TextChanged="UserTextBox_TextChanged" />
+                            <ListBox Name="userListBox" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Margin="5 5 5 5" Height="70" SelectionChanged="UserListBox_SelectionChanged" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="User Information" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="3" Grid.RowSpan="6">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Name: " Margin="5,5,5,5"/>
+                                <TextBox Name="nameTextBox" MinWidth="150" MaxWidth="150" Margin="5,5,5,5" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Stars: " Margin="5,5,5,5"/>
+                                <TextBox Name="starsTextBox" MinWidth="100" MaxWidth="100" Margin="5,5,5,5" IsReadOnly="True"/>
+                                <Label Content="Fans: " Margin="5,5,5,5"/>
+                                <TextBox Name="fansTextBox" MinWidth="100" MaxWidth="100" Margin="5,5,5,5" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Yelping Since: " Margin="5,5,5,5"/>
+                                <TextBox Name="yelpingTextBox" MinWidth="150" MaxWidth="150" Margin="5,5,5,5" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Votes: " Margin="5,5,5,5"/>
+                                <Label Content="Funny: " Margin="5,5,5,5"/>
+                                <Label Content="Cool: " Margin="5,5,5,5"/>
+                                <Label Content="Useful: " Margin="5,5,5,5"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="funnyTextBox" MinWidth="50" MaxWidth="50" Margin="50,0,5,5" IsReadOnly="True"/>
+                                <TextBox Name="coolTextBox" MinWidth="50" MaxWidth="50" Margin="5,0,5,5" IsReadOnly="True"/>
+                                <TextBox Name="usefulTextBox" MinWidth="50" MaxWidth="50" Margin="5,0,5,5" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Latitude: " Margin="5,5,5,5"/>
+                                <TextBox Name="latTextBox" MinWidth="100" MaxWidth="100" Margin="15,5,5,5" IsEnabled="False"/>
+                                <Button Name="editButton" MinWidth="100" MaxWidth="100" Content="Edit" Margin="40,5,5,5" Click="EditButton_Click" IsEnabled="false"></Button>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Longitude: " Margin="5,5,5,5"/>
+                                <TextBox Name="longTextBox" MinWidth="100" MaxWidth="100" Margin="5,5,5,5" IsEnabled="False"/>
+                                <Button Name="updateButton" MinWidth="100" MaxWidth="100" Content="Update" Margin="40,5,5,5" Click="UpdateButton_Click" IsEnabled="false"></Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Favorite Business" Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="9" Grid.RowSpan="4">
+                        <DataGrid Name="favoriteDataGrid"/>
+                    </GroupBox>
+                    <Button Name="favButton" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13" Content="Remove from Favorites" Margin="5,5,5,5" Click="FavButton_Click_1"/>
+                    <GroupBox Header="Friends" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="9">
+                        <DataGrid Name="friendDataGrid"/>
+                    </GroupBox>
+                    <GroupBox Header="Friend Reviews" Grid.Column="7" Grid.ColumnSpan="7" Grid.Row="0" Grid.RowSpan="13">
+                        <DataGrid Name="friendReviewDataGrid"/>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Business Search">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                        <ColumnDefinition Width ="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Select Location" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="5">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="State: " Margin="5,5,5,5"/>
+                                <ComboBox Name="stateComboBox" MinWidth="150" Margin="5,5,5,5" IsReadOnly="True" SelectionChanged="StateComboBox_SelectionChanged"/>
+                            </StackPanel>
+                            <StackPanel Height="80">
+                                <GroupBox Header="City" Height="80">
+                                    <ListBox Name="cityListBox" SelectionChanged="CityListBox_SelectionChanged"/>
+                                </GroupBox>
+                            </StackPanel>
+                            <StackPanel Height="80" >
+                                <GroupBox Header="Zipcode" Height="80">
+                                    <ListBox Name="zipcodeListBox" SelectionChanged="ZipcodeListBox_SelectionChanged"/>
+                                </GroupBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Business Cateory" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="4" Grid.Row="5">
+                        <ListBox Name="categoryListBox"/>
+                    </GroupBox>
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="9">
+                        <Button Content="Add" Name="addButton" Margin="5,5,5,5" MinWidth="120" MaxWidth="120" Click="AddButton_Click"/>
+                        <Button Content="Remove" Name="removeButton" Margin="5,5,5,5" MinWidth="120" MaxWidth="120" Click="RemoveButton_Click"/>
+                    </StackPanel>
+                    <ListBox Name="categorySearchListBox" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Grid.Row="10"/>
+                    <Button FontWeight="Bold" Content="Search Business" Name="searchButton" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="13" Margin="5,5,5,0" Click="SearchButton_Click" Height="30" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="0">
+                        <Label Content="# of businesses: "/>
+                        <Label Name="businessNumLabel"/>
+                    </StackPanel>
+                    <GroupBox Header="SEARCH BUSINESSES" Grid.Column="3" Grid.ColumnSpan="7" Grid.Row="1" Grid.RowSpan="7" Margin="5,0,5,5">
+                        <DataGrid Name="searchDataGrid" SelectionChanged="SearchDataGrid_SelectionChanged"/>
+                    </GroupBox>
+                    <GroupBox Header="Selected Business" Grid.Column="3" Grid.ColumnSpan="10" Grid.Row="8" Grid.RowSpan="6" Margin="5,5,5,5" >
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="businessTextBox" MinWidth="250" Margin="10,5,10,5" IsReadOnly="True"/>
+                                <TextBox Name="addressTextBox" MinWidth="350" Margin="10,5,10,5" IsReadOnly="True"/>
+                                <Button Name="viewPhotoButton" Content="View Photos"  MinWidth="80" Margin="65,5,10,5"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBox Name="attributesTextBox" MinWidth="200" MaxHeight="60" Margin="10,5,10,5" IsReadOnly="True" 
+                                         TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                                <TextBox Name="categoryTextBox" MinWidth="200" MaxHeight="60" Margin="10,5,10,5" IsReadOnly="True" 
+                                         TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                                <TextBox Name="hoursTextBox" MinWidth="200" MaxHeight="60" Margin="10,5,10,5" IsReadOnly="True" 
+                                         TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel>
+                                        <Button Name="checkinButton" Content="Check-In" MinWidth="85" MinHeight="30" Margin="0,5,0,0" Click="CheckinButton_Click"/>
+                                        <Button Name="addToFavButton" Content="Add To Favs" MinWidth="85" MinHeight="30" Margin="0,0,0,5" Click="AddToFavButton_Click"/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Button Name="showCheckinButton" Content="Show Checkins" MinWidth="85" MinHeight="30" Margin="0,5,0,0" Click="ShowCheckinButton_Click"/>
+                                        <Button Name="showReviewButton" Content="Show Reviews" MinWidth="85" MinHeight="30" Margin="0,0,0,0" Click="ShowReviewButton_Click"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="reviewTextBox" MinWidth="600" MaxWidth="600" TextWrapping="Wrap" AcceptsReturn="True" 
+                                         VerticalScrollBarVisibility="Visible" MinHeight="40" MaxHeight="40" Margin="10,5,10,5 " IsEnabled="false"/>
+                                <ComboBox Name="ratingComboBox" MinWidth="50" MinHeight="30" Margin="10,5,10,5" FontSize="15" VerticalContentAlignment="Center"
+                                          HorizontalContentAlignment="Center" SelectedIndex="4">
+                                    <ComboBoxItem Content="1"/>
+                                    <ComboBoxItem Content="2"/>
+                                    <ComboBoxItem Content="3"/>
+                                    <ComboBoxItem Content="4"/>
+                                    <ComboBoxItem Content="5"/>
+                                </ComboBox>
+                                <Button Name="addReviewButton" Content="Add Review" MinWidth="130" MinHeight="30" Margin="10,5,10,5" Click="AddReviewButton_Click"/>
+                            </StackPanel>
+                            <GroupBox Header="Friends who reviewed this business" MinHeight="90">
+                                <DataGrid Name="businessFriendReviewDataGrid"/>
+                            </GroupBox>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Filter by Price:" Grid.Column="10" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Name="priceOneCheckBox" Content="$" Margin="50,10,10,10"/>
+                                <CheckBox Name="priceTwoCheckBox" Content="$$" Margin="50,10,10,10"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Name="priceThreeCheckBox" Content="$$$" Margin="50,10,10,10"/>
+                                <CheckBox Name="priceFourCheckBox" Content="$$$$" Margin="38,10,10,10"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Filter by Attributes:" Grid.Column="10" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="5">
+                        <StackPanel>
+                            <CheckBox Name="creditCardCheckBox" Content="Accepts Credit Cards" Margin="5,0,5,5"/>
+                            <CheckBox Name="reservationCheckBox" Content="Takes Reservations" Margin="5,0,5,5"/>
+                            <CheckBox Name="wheelchairCheckBox" Content="Wheelchair Accessible" Margin="5,0,5,5"/>
+                            <CheckBox Name="outdoorCheckBox" Content="Outdoor Seating" Margin="5,0,5,5"/>
+                            <CheckBox Name="kidsCheckBox" Content="Good for Kids" Margin="5,0,5,5"/>
+                            <CheckBox Name="groupCheckBox" Content="Good for Groups" Margin="5,0,5,5"/>
+                            <CheckBox Name="deliveryCheckBox" Content="Delivery" Margin="5,0,5,5"/>
+                            <CheckBox Name="takeOutCheckBox" Content="Take Out" Margin="5,0,5,5"/>
+                            <CheckBox Name="wifiCheckBox" Content="Free Wi-Fi" Margin="5,0,5,5"/>
+                            <CheckBox Name="bikeCheckBox" Content="Bike Parking" Margin="5,0,5,5"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Filter by Meal:" Grid.Column="12" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="5">
+                        <StackPanel>
+                            <CheckBox Name="breakfastCheckBox" Content="Breakfast" Margin="0,5,5,5"/>
+                            <CheckBox Name="brunchCheckBox" Content="Brunch" Margin="0,5,5,5"/>
+                            <CheckBox Name="lunchCheckBox" Content="Lunch" Margin="0,5,5,5"/>
+                            <CheckBox Name="dinnerCheckBox" Content="Dinner" Margin="0,5,5,5"/>
+                            <CheckBox Name="dessertCheckBox" Content="Dessert" Margin="0,5,5,5"/>
+                            <CheckBox Name="lateNightCheckBox" Content="Late Night" Margin="0,5,5,5"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox  Header="Sort Results By:" Grid.Column="10" Grid.ColumnSpan="3" Grid.Row="7" Grid.RowSpan="1">
+                        <ComboBox Name="sortByComboBox" SelectedIndex="0" SelectionChanged="SortByComboBox_SelectionChanged">
+                            <ComboBoxItem Content="Name"/>
+                            <ComboBoxItem Content="Highest Stars"/>
+                            <ComboBoxItem Content="Most Reviewed"/>
+                            <ComboBoxItem Content="Best Review Rating"/>
+                            <ComboBoxItem Content="Most check-ins"/>
+                            <ComboBoxItem Content="Nearest"/>
+                        </ComboBox>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Map">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0"  Grid.RowSpan="1" Orientation="Horizontal">
+                        <ComboBox Name="searchMapTextBox" MaxWidth="200" MinWidth="200" Margin="10,10,10,10" VerticalContentAlignment="Center" IsEditable="true"/>
+                        <Button Name="searchMapButton" MaxWidth="100" MinWidth="100" Content="Search" Margin="10,10,10,10" Click="SearchMapButton_Click"/>
+                    </StackPanel>
+                    <Grid Grid.Row="1" Grid.RowSpan="13">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="113*"/>
+                            <ColumnDefinition Width="1023*"/>
+                        </Grid.ColumnDefinitions>
+                        <m:Map x:Name="myMap" CredentialsProvider="Akg1Bxeo9S0_umkUKYCmip6n0g37vn12fuoNW8ZKJfbGbBYaW8ngs1HCEzcVRs83" Mode="AerialWithLabels" Grid.ColumnSpan="2"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Business Information">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Log In" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="3">
+                        <StackPanel>
+                            <TextBox Name="businessLogInTextBox" Margin="10,10,10,10" TextChanged="BusinessLogInTextBox_TextChanged"/>
+                            <ListBox Name="businessLogInListBox" Margin="10,0,10,0" Height="70" SelectionChanged="BusinessLogInListBox_SelectionChanged"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Business Information" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" Grid.RowSpan="8">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Name: "/>
+                                <TextBox Name="businessLogInNameTextBox" MinWidth="200" Margin="10,0,0,0" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Address: "/>
+                                <TextBox Name="businessLogInAddressTextBox" MinWidth="200" Margin="0,0,0,0" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="State: "/>
+                                <TextBox Name="businessLogInStateTextBox" MinWidth="200" Margin="16,0,0,0" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="City: "/>
+                                <TextBox Name="businessLogInCityTextBox" MinWidth="200" Margin="22,0,0,0" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Zipcode: "/>
+                                <TextBox Name="businessLogInZipTextBox" MinWidth="200" Margin="0,0,0,0" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Stars: "/>
+                                <TextBox Name="businessLogInStarsTextBox" MinWidth="200" Margin="17,0,0,0" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Review Count: "/>
+                                <TextBox Name="businessLogInCountTextBox" MinWidth="100" Margin="22,0,0,0" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Review Rating: "/>
+                                <TextBox Name="businessLogInRatingTextBox" MinWidth="100" Margin="20,0,0,0" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Number Checkins: "/>
+                                <TextBox Name="businessLogInCheckinsTextBox" MinWidth="100" Margin="0,0,0,0" IsReadOnly="True"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Latitude: "/>
+                                <TextBox Name="businessLatitudeTextBox" MinWidth="75" Margin="0,0,0,0" IsReadOnly="True"/>
+                                <Label Content="Longitude: "/>
+                                <TextBox Name="businessLongitudeTextBox" MinWidth="75" Margin="0,0,0,0" IsReadOnly="True"/>
+                            </StackPanel>
+                            
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Your Reviews" Grid.Column="3" Grid.ColumnSpan="8" Grid.Row="0" Grid.RowSpan="8">
+                        <DataGrid Name="businessLogInReviewDataGrid"/>
+                    </GroupBox>
+                    <GroupBox Header="Business Report Notifications" Grid.Column="5" Grid.ColumnSpan="6" Grid.Row="8" Grid.RowSpan="6">
+                        <DataGrid Name="businessLogInNotificationsDataGrid"/>
+                    </GroupBox>
+                    <GroupBox Header="Other Business Information" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="8" Grid.RowSpan="5">
+                        <StackPanel>
+                            
+                            <TextBox Name="loggedInCategories" MaxHeight="60" MinHeight="60" IsReadOnly="True" VerticalScrollBarVisibility="Visible"
+                                         TextWrapping="Wrap" AcceptsReturn="True"/>
+                            <TextBox Name="loggedInAttributes" MaxHeight="60" MinHeight="60" IsReadOnly="True" VerticalScrollBarVisibility="Visible"
+                                         TextWrapping="Wrap" AcceptsReturn="True"/>
+                            <ComboBox Name="dayComboBox" SelectedIndex="0" SelectionChanged="LoadDayComboBox_SelectionChanged">
+
+                                <ComboBoxItem Content="Monday"/>
+                                <ComboBoxItem Content="Tuesday"/>
+                                <ComboBoxItem Content="Wednesday"/>
+                                <ComboBoxItem Content="Thursday"/>
+                                <ComboBoxItem Content="Friday"/>
+                                <ComboBoxItem Content="Saturday"/>
+                                <ComboBoxItem Content="Sunday"/>
+                            </ComboBox>
+                            <TextBox Name="loggedInHours" MaxHeight="60"  MinHeight="60" IsReadOnly="True" VerticalScrollBarVisibility="Visible"
+                                         TextWrapping="Wrap" AcceptsReturn="True"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <Button Name="logInEditInfo" Grid.Column="3" Grid.Row="14" Content="Edit" Margin="5,5,5,5"/>
+                    <Button Name="logInUpdateInfo" Grid.Column="4" Grid.Row="14" Content="Update" Margin="5,5,5,5"/>
+                    <Button Name="businessLogInViewPhotoButton" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="12" Content="View Photos" Margin="5,5,5,5"/>
+                    <Button Name="businessLogInViewCheckinButton" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="11" Content="View Checkin" Margin="5,5,5,5" Click="BusinessLogInViewCheckinButton_Click"/>
+                    <Button Name="businessLogInFlagButton" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="13" Content="Flag Selected Review" Margin="5,5,5,5"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

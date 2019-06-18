@@ -1,0 +1,13 @@
+﻿<Window x:Class="YelpProject.Map.AnyMap"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:local="clr-namespace:YelpProject.Map"
+        mc:Ignorable="d"
+        Title="AnyMap" Height="450" Width="800">
+    <Grid>
+        <m:Map x:Name="newMap" CredentialsProvider="Akg1Bxeo9S0_umkUKYCmip6n0g37vn12fuoNW8ZKJfbGbBYaW8ngs1HCEzcVRs83" Mode="Road"/>
+    </Grid>
+</Window>
